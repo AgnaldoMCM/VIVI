@@ -75,3 +75,33 @@ final.style.animation = 'fadeInUp 1s ease forwards';
 }, 700);
 }
 });
+
+const aniversario = document.getElementById("aniversario");
+const btnObrigado = document.getElementById("btnObrigado");
+const confettiContainer = document.getElementById("confetti-container");
+
+const colors = ["#fff", "#ffd166", "#ef476f", "#06d6a0", "#118ab2"];
+
+function createConfetti() {
+  const confetti = document.createElement("div");
+  confetti.classList.add("confetti");
+  confetti.style.left = Math.random() * 100 + "vw";
+  confetti.style.backgroundColor =
+    colors[Math.floor(Math.random() * colors.length)];
+  confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+  confettiContainer.appendChild(confetti);
+
+  setTimeout(() => confetti.remove(), 5000);
+}
+
+const confettiInterval = setInterval(createConfetti, 150);
+
+btnObrigado.addEventListener("click", () => {
+  clearInterval(confettiInterval);
+  aniversario.classList.add("fade-out");
+
+  setTimeout(() => {
+    aniversario.style.display = "none";
+  }, 1000);
+});
